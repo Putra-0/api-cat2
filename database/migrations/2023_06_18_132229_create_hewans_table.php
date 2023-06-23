@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('hewans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->string('nama_hewan');
             $table->string('description');
             $table->string('jenis_kelamin');
