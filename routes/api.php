@@ -47,7 +47,6 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/profile/password', [UserController::class, 'updatePassword']);
 
         Route::get('/hewans/search/{keyword}', [HewanController::class, 'search']);
-
         Route::get('/hewans', [HewanController::class, 'index']);
         Route::get('/hewans/{id}', [HewanController::class, 'show']);
 
