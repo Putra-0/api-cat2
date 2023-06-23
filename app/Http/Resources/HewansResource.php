@@ -27,6 +27,7 @@ class HewansResource extends JsonResource
             'status_vaksin' => $this->status_vaksin,
             'status' => $this->status,
             'type_id' => $this->type_id,
+            'type' => $this->type,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

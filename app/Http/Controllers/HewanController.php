@@ -26,6 +26,7 @@ class HewanController extends Controller
                     'message' => 'Retrieve All Success',
                     'data' => HewansResource::collection($hewans),
                 ], 200);
+
             } else {
                 return response([
                     'status' => false,

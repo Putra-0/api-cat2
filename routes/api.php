@@ -35,7 +35,9 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/types/{id}', [TypeController::class, 'update']);
         Route::delete('/types/{id}', [TypeController::class, 'destroy']);
 
-        Route::apiResource('hewans', HewanController::class);
+        Route::post('/hewans', [HewanController::class, 'store']);
+        Route::put('/hewans/{id}', [HewanController::class, 'update']);
+        Route::delete('/hewans/{id}', [HewanController::class, 'destroy']);
 
     });
 
@@ -43,13 +45,15 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/profile', [UserController::class, 'profile']);
         Route::put('/profile', [UserController::class, 'updateProfile']);
         Route::put('/profile/password', [UserController::class, 'updatePassword']);
+
         Route::get('/hewans/search/{keyword}', [HewanController::class, 'search']);
+
+        Route::get('/hewans', [HewanController::class, 'index']);
+        Route::get('/hewans/{id}', [HewanController::class, 'show']);
 
     });
 
     Route::middleware('role:user')->group(function () {
-        Route::get('/hewans', [HewanController::class, 'index']);
-        Route::get('/hewans/{id}', [HewanController::class, 'show']);
 
     });
 });
