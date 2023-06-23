@@ -24,6 +24,7 @@ class HewansResource extends JsonResource
             'images' => ImagesResource::collection($this->getMedia('images')),
             'umur' => $this->umur,
             'berat' => $this->berat,
+            'harga' => $this->harga,
             'status_vaksin' => $this->status_vaksin,
             'status' => $this->status,
             'type_id' => $this->type_id,
