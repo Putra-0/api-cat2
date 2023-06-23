@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('hewans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->string('nama_hewan');
             $table->string('description');
             $table->string('jenis_kelamin');
+            $table->string('umur');
+            $table->string('berat');
+            $table->string('status_vaksin');
+            $table->string('status')->default('tersedia');
             $table->timestamps();
         });
     }

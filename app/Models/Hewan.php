@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,11 +22,6 @@ class Hewan extends Model implements HasMedia
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->translatedFormat('l, d F Y H:i:s');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
     }
 
 }

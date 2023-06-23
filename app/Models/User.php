@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Hewan;
 use App\Models\Role;
 use App\Models\Transaction;
 use DateTimeInterface;
@@ -56,11 +55,6 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
-    }
-
-    public function hewan()
-    {
-        return $this->hasMany(Hewan::class);
     }
 
     public function transaksi()
