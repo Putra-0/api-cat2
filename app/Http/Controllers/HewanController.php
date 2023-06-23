@@ -19,7 +19,7 @@ class HewanController extends Controller
     public function index()
     {
         try {
-            $hewans = Hewan::all();
+            $hewans = Hewan::with('type')->get();
             if (count($hewans) > 0) {
                 return response([
                     'status' => true,
@@ -56,12 +56,16 @@ class HewanController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|exists:users,id',
             'nama_hewan' => 'required',
             'description' => 'required',
             'jenis_kelamin' => 'required',
             'images' => 'required|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'umur' => 'required',
+            'berat' => 'required',
+            'status_vaksin' => 'required',
+            'status' => 'nullable',
+            'type_id' => 'required|exists:types,id',
         ]);
 
         if ($validator->fails()) {
@@ -74,10 +78,14 @@ class HewanController extends Controller
 
         try {
             $hewan = Hewan::create([
-                'user_id' => $request->user_id,
                 'nama_hewan' => $request->nama_hewan,
                 'description' => $request->description,
                 'jenis_kelamin' => $request->jenis_kelamin,
+                'umur' => $request->umur,
+                'berat' => $request->berat,
+                'status_vaksin' => $request->status_vaksin,
+                'status' => $request->status,
+                'type_id' => $request->type_id,
             ]);
 
             if ($images = $request->images) {
@@ -155,12 +163,16 @@ class HewanController extends Controller
         try {
             $hewan = Hewan::find($id);
             $validator = Validator::make($request->all(), [
-                'user_id' => 'required|exists:users,id',
                 'nama_hewan' => 'required',
                 'description' => 'required',
                 'jenis_kelamin' => 'required',
                 'images' => 'required|array',
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'umur' => 'required',
+                'berat' => 'required',
+                'status_vaksin' => 'required',
+                'status' => 'nullable',
+                'type_id' => 'required|exists:types,id',
             ]);
             if ($validator->fails()) {
                 return response([
@@ -175,6 +187,11 @@ class HewanController extends Controller
                 'nama_hewan' => $request->nama_hewan,
                 'description' => $request->description,
                 'jenis_kelamin' => $request->jenis_kelamin,
+                'umur' => $request->umur,
+                'berat' => $request->berat,
+                'status_vaksin' => $request->status_vaksin,
+                'status' => $request->status,
+                'type_id' => $request->type_id,
             ]);
 
             if ($images = $request->images) {

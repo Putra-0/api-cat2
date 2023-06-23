@@ -19,6 +19,11 @@ class Hewan extends Model implements HasMedia
         $this->addMediaCollection('images');
     }
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->translatedFormat('l, d F Y H:i:s');

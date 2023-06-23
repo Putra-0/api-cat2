@@ -18,11 +18,15 @@ class HewansResource extends JsonResource
         return [
 
             'id' => $this->id,
-            'user_id' => $this->user_id,
             'nama_hewan' => $this->nama_hewan,
             'description' => $this->description,
             'jenis_kelamin' => $this->jenis_kelamin,
             'images' => ImagesResource::collection($this->getMedia('images')),
+            'umur' => $this->umur,
+            'berat' => $this->berat,
+            'status_vaksin' => $this->status_vaksin,
+            'status' => $this->status,
+            'type_id' => $this->type_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
