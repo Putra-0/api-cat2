@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('hewan_id')->constrained('hewans')->onDelete('cascade');
             $table->datetime('tanggal_pengambilan');
-            $table->string('status')->default('pending');
+            $table->string('status')->default('Menunggu Konfirmasi');
             $table->string('status_penerimaan');
             $table->timestamps();
         });

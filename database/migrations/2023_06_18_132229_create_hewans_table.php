@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('jenis_kelamin');
             $table->string('umur');
             $table->string('berat');
+            $table->string('harga');
             $table->string('status_vaksin');
             $table->string('status')->default('tersedia');
             $table->timestamps();

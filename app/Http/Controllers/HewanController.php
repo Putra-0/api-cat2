@@ -64,6 +64,7 @@ class HewanController extends Controller
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'umur' => 'required',
             'berat' => 'required',
+            'harga' => 'required',
             'status_vaksin' => 'required',
             'type_id' => 'required|exists:types,id',
         ]);
@@ -83,6 +84,7 @@ class HewanController extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'umur' => $request->umur,
                 'berat' => $request->berat,
+                'harga' => $request->harga,
                 'status_vaksin' => $request->status_vaksin,
                 'status' => 'Tersedia',
                 'type_id' => $request->type_id,
@@ -170,6 +172,7 @@ class HewanController extends Controller
                 'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                 'umur' => 'required',
                 'berat' => 'required',
+                'harga' => 'required',
                 'status_vaksin' => 'required',
                 'status' => 'nullable',
                 'type_id' => 'required|exists:types,id',
@@ -189,6 +192,7 @@ class HewanController extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'umur' => $request->umur,
                 'berat' => $request->berat,
+                'harga' => $request->harga,
                 'status_vaksin' => $request->status_vaksin,
                 'status' => $request->status,
                 'type_id' => $request->type_id,
@@ -269,6 +273,7 @@ class HewanController extends Controller
                 ->orWhere('jenis_kelamin', 'like', '%' . $keyword . '%')
                 ->orWhere('umur', 'like', '%' . $keyword . '%')
                 ->orWhere('berat', 'like', '%' . $keyword . '%')
+                ->orWhere('harga', 'like', '%' . $keyword . '%')
                 ->orWhere('status_vaksin', 'like', '%' . $keyword . '%')
                 ->orWhere('status', 'like', '%' . $keyword . '%')
                 ->orWhere('type_id', 'like', '%' . $keyword . '%')

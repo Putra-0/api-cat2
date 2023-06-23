@@ -39,6 +39,8 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/hewans/{id}', [HewanController::class, 'update']);
         Route::delete('/hewans/{id}', [HewanController::class, 'destroy']);
 
+        Route::put('/transactions/{id}', [TransactionController::class, 'update']);
+
     });
 
     Route::middleware('role:admin,user')->group(function () {
@@ -50,9 +52,13 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/hewans', [HewanController::class, 'index']);
         Route::get('/hewans/{id}', [HewanController::class, 'show']);
 
+        Route::get('/transactions', [TransactionController::class, 'index']);
+        Route::get('/transactions/{id}', [TransactionController::class, 'show']);
+
     });
 
     Route::middleware('role:user')->group(function () {
+        Route::post('/transactions', [TransactionController::class, 'store']);
 
     });
 });
