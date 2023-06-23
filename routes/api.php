@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HewanController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,19 +29,22 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/users/{id}', [UserController::class, 'update']);
         Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
-        Route::get('types', [HewanController::class, 'Index']);
-        Route::get('types/{id}', [HewanController::class, 'show']);
-        Route::post('types', [HewanController::class, 'store']);
-        Route::put('types/{id}', [HewanController::class, 'update']);
-        Route::delete('types/{id}', [HewanController::class, 'destroy']);
+        Route::get('types', [TypeController::class, 'Index']);
+        Route::get('/types/{id}', [TypeController::class, 'show']);
+        Route::post('/types', [TypeController::class, 'store']);
+        Route::put('/types/{id}', [TypeController::class, 'update']);
+        Route::delete('/types/{id}', [TypeController::class, 'destroy']);
 
-        Route::apiResource('/hewans', HewanController::class);
+        Route::apiResource('hewans', HewanController::class);
+
     });
 
     Route::middleware('role:admin,user')->group(function () {
         Route::get('/profile', [UserController::class, 'profile']);
         Route::put('/profile', [UserController::class, 'updateProfile']);
         Route::put('/profile/password', [UserController::class, 'updatePassword']);
+        Route::get('/hewans/search/{keyword}', [HewanController::class, 'search']);
+
     });
 
     Route::middleware('role:user')->group(function () {

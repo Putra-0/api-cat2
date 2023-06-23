@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TypeController extends Controller
 {
@@ -50,7 +53,7 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Type::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'nama_type' => 'required',
         ]);
 

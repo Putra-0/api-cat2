@@ -19,7 +19,7 @@ class HewanController extends Controller
     public function index()
     {
         try {
-            $hewans = Hewan::with('type')->get();
+            $hewans = Hewan::all();
             if (count($hewans) > 0) {
                 return response([
                     'status' => true,
@@ -64,7 +64,6 @@ class HewanController extends Controller
             'umur' => 'required',
             'berat' => 'required',
             'status_vaksin' => 'required',
-            'status' => 'nullable',
             'type_id' => 'required|exists:types,id',
         ]);
 
@@ -84,7 +83,7 @@ class HewanController extends Controller
                 'umur' => $request->umur,
                 'berat' => $request->berat,
                 'status_vaksin' => $request->status_vaksin,
-                'status' => $request->status,
+                'status' => 'Tersedia',
                 'type_id' => $request->type_id,
             ]);
 
@@ -253,6 +252,47 @@ class HewanController extends Controller
             return response([
                 'status' => false,
                 'message' => 'Hewan Deleted Failed',
+            ], 500);
+        }
+    }
+
+    /**
+     * Search by all column with keyword.
+     */
+
+    public function search($keyword)
+    {
+        try {
+            $hewan = Hewan::where('nama_hewan', 'like', '%' . $keyword . '%')
+                ->orWhere('description', 'like', '%' . $keyword . '%')
+                ->orWhere('jenis_kelamin', 'like', '%' . $keyword . '%')
+                ->orWhere('umur', 'like', '%' . $keyword . '%')
+                ->orWhere('berat', 'like', '%' . $keyword . '%')
+                ->orWhere('status_vaksin', 'like', '%' . $keyword . '%')
+                ->orWhere('status', 'like', '%' . $keyword . '%')
+                ->orWhere('type_id', 'like', '%' . $keyword . '%')
+                ->get();
+            if (count($hewan) > 0) {
+                return response([
+                    'status' => true,
+                    'message' => 'Search Hewan Success',
+                    'data' => HewansResource::collection($hewan),
+                ], 200);
+            } else {
+                return response([
+                    'status' => false,
+                    'message' => 'Hewan Not Found',
+                ], 404);
+            }
+        } catch (\Exception $e) {
+            return response([
+                'status' => false,
+                'message' => 'Search Hewan Failed',
+            ], 500);
+        } catch (\Error $e) {
+            return response([
+                'status' => false,
+                'message' => 'Search Hewan Failed',
             ], 500);
         }
     }
