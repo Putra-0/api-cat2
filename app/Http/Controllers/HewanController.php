@@ -186,7 +186,6 @@ class HewanController extends Controller
             }
 
             $hewan->update([
-                'user_id' => $request->user_id,
                 'nama_hewan' => $request->nama_hewan,
                 'description' => $request->description,
                 'jenis_kelamin' => $request->jenis_kelamin,
