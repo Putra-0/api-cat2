@@ -168,13 +168,10 @@ class HewanController extends Controller
                 'nama_hewan' => 'required',
                 'description' => 'required',
                 'jenis_kelamin' => 'required',
-                'images' => 'required|array',
-                'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                 'umur' => 'required',
                 'berat' => 'required',
                 'harga' => 'required',
                 'status_vaksin' => 'required',
-                'status' => 'nullable',
                 'type_id' => 'required|exists:types,id',
             ]);
             if ($validator->fails()) {
@@ -193,16 +190,8 @@ class HewanController extends Controller
                 'berat' => $request->berat,
                 'harga' => $request->harga,
                 'status_vaksin' => $request->status_vaksin,
-                'status' => $request->status,
                 'type_id' => $request->type_id,
             ]);
-
-            if ($images = $request->images) {
-                $hewan->clearMediaCollection('images');
-                foreach ($images as $image) {
-                    $hewan->addMedia($image)->toMediaCollection('images', 'images');
-                }
-            }
 
             return response([
                 'status' => true,
