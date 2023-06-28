@@ -208,4 +208,41 @@ class TransactionController extends Controller
     {
 
     }
+
+    /**
+     * Transaction History by user
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function history($id)
+    {
+        try {
+            $transactions = Transaction::with('user', 'hewan')->where('user_id', $id)->get();
+            if (count($transactions) > 0) {
+                return response([
+                    'status' => true,
+                    'message' => 'Retrieve All Success',
+                    'data' => $transactions,
+                ], 200);
+            } else {
+                return response([
+                    'status' => false,
+                    'message' => 'Empty',
+                ], 404);
+            }
+        } catch (\Exception $e) {
+            return response([
+                'status' => false,
+                'message' => 'Retrieve All Failed',
+                'data' => $e->getMessage(),
+            ], 500);
+        } catch (\Errror $e) {
+            return response([
+                'status' => false,
+                'message' => 'Retrieve All Failed',
+                'data' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

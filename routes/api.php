@@ -60,6 +60,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::middleware('role:user')->group(function () {
         Route::post('/transactions', [TransactionController::class, 'store']);
+        Route::get('/transactions/history', [TransactionController::class, 'history']);
 
     });
 });
