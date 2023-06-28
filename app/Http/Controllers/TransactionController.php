@@ -58,7 +58,6 @@ class TransactionController extends Controller
             'user_id' => 'required|exists:users,id',
             'hewan_id' => 'required|exists:hewans,id',
             'tanggal_pengambilan' => 'required',
-            'status_penerimaan' => 'required',
         ]);
         if ($validator->fails()) {
             return response([
@@ -74,7 +73,7 @@ class TransactionController extends Controller
                 'hewan_id' => $request->hewan_id,
                 'tanggal_pengambilan' => $request->tanggal_pengambilan,
                 'status' => 'Menunggu Konfirmasi',
-                'status_penerimaan' => $request->status_penerimaan,
+                'status_penerimaan' => 'Belum Diterima',
             ]);
 
             Hewan::where('id', $request->hewan_id)->update([
