@@ -171,6 +171,8 @@ class HewanController extends Controller
                 'umur' => 'required',
                 'berat' => 'required',
                 'harga' => 'required',
+                'images' => 'required|array',
+                'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
                 'status_vaksin' => 'required',
                 'type_id' => 'required|exists:types,id',
             ]);
@@ -192,6 +194,13 @@ class HewanController extends Controller
                 'status_vaksin' => $request->status_vaksin,
                 'type_id' => $request->type_id,
             ]);
+
+            if ($images = $request->images) {
+                $hewan->clearMediaCollection('images');
+                foreach ($images as $image) {
+                    $hewan->addMedia($image)->toMediaCollection('images');
+                }
+            }
 
             return response([
                 'status' => true,
