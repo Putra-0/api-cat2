@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Transaction;
 use App\Models\Type;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,6 +24,11 @@ class Hewan extends Model implements HasMedia
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 
     protected function serializeDate(DateTimeInterface $date)
