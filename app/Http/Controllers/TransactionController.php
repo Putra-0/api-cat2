@@ -105,36 +105,36 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        try {
-            $transaction = Transaction::with('hewan', 'user')->find($id);
-            if (!empty($transaction)) {
-                return response([
-                    'status' => true,
-                    'message' => 'Retrieve Transaction Success',
-                    'data' => $transaction,
-                ], 200);
-            } else {
-                return response([
-                    'status' => false,
-                    'message' => 'Transaction Not Found',
-                ], 404);
-            }
-        } catch (\Exception $e) {
+    public function show($user_id, $transaction_id)
+{
+    try {
+        $transaction = Transaction::with('hewan', 'user')->where('id', $transaction_id)->where('user_id', $user_id)->first();
+        if (!empty($transaction)) {
+            return response([
+                'status' => true,
+                'message' => 'Retrieve Transaction Success',
+                'data' => $transaction,
+            ], 200);
+        } else {
             return response([
                 'status' => false,
-                'message' => 'Retrieve Transaction Failed',
-                'data' => $e->getMessage(),
-            ], 500);
-        } catch (\Errror $e) {
-            return response([
-                'status' => false,
-                'message' => 'Retrieve Transaction Failed',
-                'data' => $e->getMessage(),
-            ], 500);
+                'message' => 'Transaction Not Found',
+            ], 404);
         }
+    } catch (\Exception $e) {
+        return response([
+            'status' => false,
+            'message' => 'Retrieve Transaction Failed',
+            'data' => $e->getMessage(),
+        ], 500);
+    } catch (\Errror $e) {
+        return response([
+            'status' => false,
+            'message' => 'Retrieve Transaction Failed',
+            'data' => $e->getMessage(),
+        ], 500);
     }
+}
 
     /**
      * Update the specified resource in storage.
